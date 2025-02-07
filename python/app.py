@@ -4,6 +4,7 @@ from flask_cors import CORS
 import request.request as req
 import controller.auth.auth as user
 import controller.attraction as attraction
+import controller.review as review
 
 app = Flask(__name__)
 CORS(app)
@@ -67,3 +68,31 @@ def login():
 
     result = jsonify({"token": user.encode_auth_token(list(records[0])[0]), "name": json['name']})
     return result, 200
+
+# Review
+@app.post('/review')
+def addReview():
+    print("okok", flush=True)
+    json = request.get_json()
+    retour = review.add_review(json)
+    if (retour):
+        return jsonify({"message": "Element ajouté.", "result": retour}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500
+
+@app.get('/review')
+def getAllReview():
+    result = review.get_all_review()
+    return result, 200
+
+@app.get('/review/<int:index>')
+def getReview(index):
+    result = review.get_review(index)
+    return result, 200
+
+@app.delete('/review/<int:index>')
+def deleteReview(index):
+    json = request.get_json()
+    
+    if (review.delete_review(index)):
+        return "Element supprimé.", 200
+    return jsonify({"message": "Erreur lors de la suppression."}), 500

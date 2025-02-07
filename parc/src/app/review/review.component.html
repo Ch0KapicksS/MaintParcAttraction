@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Page pour<button mat-button (click)="addReview()">Ajouter</button>, modifier et supprimer des critiques
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="review-title">
+      <div class="review">
+        <span>Nom</span>
+        <span>Prenon</span>
+        <span>Description</span>
+        <span>Note sur 5</span>
+        <span>Est Anonyme</span>
+      </div>
+    </div>
+    <ng-container *ngIf="reviews | async">
+      <ng-container *ngFor="let formulaireReview of formulaireReviews; let indexForm = index;" [formGroup]="formulaireReview" style="display: flex; flex-direction: column;">
+
+        <div class="review" *ngIf="!formulaireDisabled[indexForm]; else showStaticView">
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="nom">
+          </mat-form-field>
+
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Prenom</mat-label>
+            <input matInput formControlName="prenom">
+          </mat-form-field>
+
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="texte">
+          </mat-form-field>
+
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Note / 5</mat-label>
+            <input matInput formControlName="note" type="number">
+          </mat-form-field>
+
+          <mat-slide-toggle class="champ" formControlName="isAnonym">Est Anonyme</mat-slide-toggle>
+
+          <button mat-button (click)="onSubmit(formulaireReview, indexForm)" class="champ">Enregistrer</button>
+        </div>
+
+        <ng-template #showStaticView>
+          <div class="review">
+            <span>{{ formulaireReview.value.nom }}</span>
+            <span>{{ formulaireReview.value.prenom }}</span>
+            <span>{{ formulaireReview.value.texte }}</span>
+            <span>{{ formulaireReview.value.note }} / 5</span>
+            <span>{{ formulaireReview.value.isAnonym ? 'Oui' : 'Non' }}</span>
+          </div>
+        </ng-template>
+
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

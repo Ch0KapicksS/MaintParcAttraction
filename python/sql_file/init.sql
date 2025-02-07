@@ -17,3 +17,15 @@ CREATE TABLE users (
     name varchar(255) not null,
     password varchar(255) not null
 );
+
+DROP TABLE IF EXISTS review;
+
+CREATE TABLE review (
+  review_id int auto_increment,
+  primary key(review_id),
+  nom varchar(255) not null,
+  prenom varchar(255) not null,
+  texte varchar(255) not null,
+  note int,
+  isAnonym bool default true
+);

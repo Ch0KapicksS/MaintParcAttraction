@@ -1,6 +1,9 @@
 <mat-toolbar>
-  <span><a routerLink="/accueil">Parc d'attraction</a></span>
-  <div *ngIf="authService.isLoggedIn">
+  <span class="logo">
+    <a routerLink="/accueil">Parc d'attraction</a>
+  </span>
+  <div class="navbar-items" *ngIf="authService.isLoggedIn">
+    <a routerLink="/review" class="nav-link">Critiques</a>
     <button mat-stroked-button (click)="logout()">Déconnexion</button>
   </div>
 </mat-toolbar>

@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './Service/auth.service';
 import { inject } from '@angular/core';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ReviewComponent } from './review/review.component';
 
 export const utilisateurEstConnecte = () => {
   const authService = inject(AuthService);
@@ -33,4 +34,9 @@ export const routes: Routes = [
       component: AccueilComponent,
     },
     { path: '',   redirectTo: '/accueil', pathMatch: 'full' }, 
+    {
+      path: 'review',
+      component: ReviewComponent,
+    },
+    { path: '',   redirectTo: '/review', pathMatch: 'full' }, 
 ];

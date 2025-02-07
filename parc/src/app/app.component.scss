@@ -1,5 +1,52 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
 mat-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(135deg, #3f51b5 0%, #2196f3 100%);
+  color: white;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+
+  .logo {
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+  }
+
+  .navbar-items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .nav-link {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #ffd740;
+      }
+    }
+
+    button {
+      border-color: white;
+      color: white;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      
+      &:hover {
+        background-color: white;
+        color: #3f51b5;
+      }
+    }
+  }
 }

@@ -1,21 +1,51 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Bienvenue sur le site internet du parc d'attraction</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="attraction-title">
-      <div class="attraction">
-        <span>Nom de l'attraction</span>
-        <span>Description de l'attraction</span>
-        <span>Difficulté de l'attraction / 5</span>
-      </div>
+<mat-card class="main-card">
+  <mat-card-header class="header-container">
+    <div class="header-content">
+      <mat-card-title class="main-title">
+        🎢 Bienvenue au Parc d'Attractions Fantastiques !
+      </mat-card-title>
+      <mat-card-subtitle class="subtitle">
+        Découvrez nos attractions palpitantes
+      </mat-card-subtitle>
     </div>
-    <ng-container *ngFor="let attraction of attractions | async;">
-      <div class="attraction">
-        <span>{{attraction.nom}}</span>
-        <span>{{attraction.description}}</span>
-        <span>{{attraction.difficulte}} / 5</span>
-      </div>
-    </ng-container>
+    <img mat-card-image src="../../assets/roller-coaster.jpg" alt="Grande roue" class="header-image">
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- En-tête du tableau -->
+    <mat-toolbar color="primary" class="attraction-header">
+      <span class="header-name">Nom de l'attraction</span>
+      <span class="header-description">Description</span>
+      <span class="header-difficulty">Difficulté</span>
+    </mat-toolbar>
+
+    <!-- Loading spinner -->
+    <div class="spinner-container" *ngIf="!(attractions | async)">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <!-- Liste des attractions -->
+    <mat-list>
+      <ng-container *ngFor="let attraction of attractions | async">
+        <mat-list-item *ngIf="attraction.visible" class="attraction-item">
+          <div class="attraction-content">
+            <span class="attraction-name">
+              {{ attraction.nom }}
+              <mat-icon class="attraction-icon">celebration</mat-icon>
+            </span>
+            <span class="attraction-description">{{ attraction.description }}</span>
+            <span class="attraction-difficulty">
+              <div class="stars-container">
+                <mat-icon *ngFor="let star of getStars(attraction.difficulte)">
+                  {{ star }}
+                </mat-icon>
+              </div>
+              <span class="rating-text">{{ attraction.difficulte }}/5</span>
+            </span>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
   </mat-card-content>
 </mat-card>
